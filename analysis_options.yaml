@@ -1,0 +1,18 @@
+include: package:flutter_lints/flutter.yaml
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    always_declare_return_types: true,
+    empty_statements: false
+
+analyzer:
+  exclude: [build/**]
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+code-style:
+  format: true
