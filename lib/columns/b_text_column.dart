@@ -1,0 +1,16 @@
+import 'package:b_grids/columns/b_column.dart';
+import 'package:b_grids/columns/column_type.dart';
+import 'package:b_grids/theming/cell_renderers.dart';
+import 'package:b_grids/theming/column_renderers.dart';
+
+class BTextColumn extends BColumn {
+  const BTextColumn({
+    super.renderer = defaultTextRenderer,
+    required super.field,
+    super.headerRenderer = defaultHeaderRenderer,
+    super.contentPadding,
+    super.defaultValue = '',
+  }) : super(
+          type: ColumnType.TEXT,
+        );
+}
