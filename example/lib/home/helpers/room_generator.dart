@@ -8,6 +8,9 @@ Room _generateRoom(int index) {
     name: faker.person.name(),
     description: 'This is a room $index',
     surfaceArea: faker.randomGenerator.integer(100, min: 10),
+    constructionDate: faker.date.dateTime(minYear: 2000, maxYear: 2050),
+    isFurnished: faker.randomGenerator.boolean(),
+    price: faker.randomGenerator.decimal(scale: 1400, min: 100),
   );
 }
 
