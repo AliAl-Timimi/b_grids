@@ -10,6 +10,8 @@ class BTextColumn extends BColumn {
     super.headerRenderer = defaultHeaderRenderer,
     super.contentPadding,
     super.defaultValue = '',
+    super.cellDecorationBuilder,
+    super.cellTextStyleBuilder,
   }) : super(
           type: ColumnType.TEXT,
         );

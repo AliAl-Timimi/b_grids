@@ -8,8 +8,15 @@ class BGridStyling {
   final BoxDecoration headerDecoration;
   final BoxDecoration rowDecoration;
   final BoxDecoration selectedRowDecoration;
+  final List<Color> alternatingRowColors;
   final Color splashColor;
   final Color hoverColor;
+  final Color descendingSortIconColor;
+  final Color ascendingSortIconColor;
+  final Color descendingSortTextColor;
+  final Color ascendingSortTextColor;
+  final Color descendingSortBackgroundColor;
+  final Color ascendingSortBackgroundColor;
 
   const BGridStyling({
     this.gridDecoration = const BoxDecoration(
@@ -50,6 +57,16 @@ class BGridStyling {
     ),
     this.splashColor = selectedRowBackgroundColor,
     this.hoverColor = hoverRowBackgroundColor,
+    this.alternatingRowColors = const [
+      rowBackgroundColor,
+      rowAlternateBackgroundColor
+    ],
+    this.descendingSortIconColor = Colors.redAccent,
+    this.ascendingSortIconColor = Colors.greenAccent,
+    this.descendingSortTextColor = Colors.black,
+    this.ascendingSortTextColor = Colors.black,
+    this.descendingSortBackgroundColor = Colors.black12,
+    this.ascendingSortBackgroundColor = Colors.black12,
   });
 
   BGridStyling copyWith({

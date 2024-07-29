@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.6.6
+  logging: ^1.2.0
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:

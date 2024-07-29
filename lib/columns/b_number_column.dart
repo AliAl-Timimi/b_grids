@@ -12,6 +12,8 @@ class BNumberColumn extends BColumn {
     super.alignment = Alignment.centerRight,
     super.contentPadding,
     super.defaultValue = 0,
+    super.cellDecorationBuilder,
+    super.cellTextStyleBuilder,
   }) : super(
           type: ColumnType.NUMBER,
         );

@@ -1,4 +1,5 @@
 import 'package:b_grids/columns/columns.dart';
+import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:b_grids/grid/b_grid.dart';
 import 'package:example/home/helpers/room_generator.dart';
 import 'package:example/models/room.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(5000000).then(
+    generateRooms(5000).then(
       (value) {
         setState(() {
           items = value;
@@ -37,6 +38,32 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = BGridStateManager<Room>(
+      columns: [
+        const BTextColumn(field: "name"),
+        const BTextColumn(field: "description"),
+        BNumberColumn(
+          field: "surfaceArea",
+          contentPadding: EdgeInsets.zero,
+          cellDecorationBuilder: (value) {
+            return BoxDecoration(
+              color: value > 50 ? Colors.red : Colors.green,
+            );
+          },
+          cellTextStyleBuilder: (value) {
+            return TextStyle(
+              color: value > 50 ? Colors.white : Colors.black,
+            );
+          },
+        ),
+      ],
+      itemToRow: {
+        'name': (room) => room.name,
+        'description': (room) => room.description,
+        'surfaceArea': (room) => room.surfaceArea,
+      },
+      valueProvider: () => items,
+    );
     if (loading) {
       return const Scaffold(
         body: Center(
@@ -63,32 +90,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: BGrid<Room>(
-                  itemToRow: {
-                    'name': (room) => room.name,
-                    'description': (room) => room.description,
-                    'surfaceArea': (room) => room.surfaceArea,
-                  },
-                  columns: [
-                    const BTextColumn(field: "name"),
-                    const BTextColumn(field: "description"),
-                    BNumberColumn(
-                      field: "surfaceArea",
-                      contentPadding: EdgeInsets.zero,
-                      renderer: (value) => Container(
-                        color: Colors.grey[300],
-                        child: Text(
-                          value.toString(),
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: (value as int) > 50
-                                  ? Colors.blue
-                                  : Colors.red),
-                        ),
-                      ),
-                    ),
-                  ],
-                  multiSelect: false,
-                  items: items,
+                  stateManager: stateManager,
                   onSelect: (room) async {
                     print("Selected room: ${room.name}");
                   },

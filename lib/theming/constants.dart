@@ -7,6 +7,7 @@ const offGrey = Color(0xFF666666);
 const headerBackgroundColor = offWhite;
 const headerTextColor = offBlack;
 const rowBackgroundColor = offWhite;
+const rowAlternateBackgroundColor = Color(0xFFE8E8E8);
 const rowTextColor = offBlack;
 const gridBackgroundColor = offWhite;
 const gridBorderColor = offGrey;

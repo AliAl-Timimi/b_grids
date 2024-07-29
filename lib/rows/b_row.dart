@@ -1,43 +1,52 @@
-import 'package:b_grids/b_grids.dart';
 import 'package:b_grids/configuration/b_grid_config.dart';
+import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BRow<T> extends StatelessWidget {
   const BRow({
     super.key,
-    required this.columns,
     required this.item,
-    required this.itemToRow,
     required this.config,
-    this.selected = false,
+    required this.stateManager,
+    required this.index,
   });
 
-  final List<BColumn> columns;
-  final Map<String, dynamic Function(T item)> itemToRow;
-  final T item;
+  final BGridStateManager<T> stateManager;
+  final T? item;
   final BGridConfig config;
-  final bool selected;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: selected
-          ? config.styling.selectedRowDecoration
-          : config.styling.rowDecoration,
-      child: Row(
-        children: columns.map((column) {
-          final value =
-              itemToRow[column.field]?.call(item) ?? column.defaultValue;
-          return Expanded(
-            child: DecoratedBox(
-              decoration: column.cellDecoration ?? BoxDecoration(),
-              child: Padding(
-                padding: column.contentPadding,
+    return Obx(
+      () => Container(
+        decoration: stateManager.isSelected(item)
+            ? config.styling.selectedRowDecoration.copyWith(
+                color: config.styling.selectedRowDecoration.color!
+                    .withOpacity(0.5))
+            : config.styling.rowDecoration.copyWith(
+                color: config.styling.alternatingRowColors[
+                    index % config.styling.alternatingRowColors.length]),
+        child: Row(
+          children: stateManager.columns.map((column) {
+            final value = item != null
+                ? stateManager.itemToRow[column.field]?.call(item!)
+                : column.defaultValue;
+            final cellDecoration = column.cellDecorationBuilder?.call(value);
+            return Expanded(
+              child: DecoratedBox(
+                decoration: cellDecoration?.copyWith(
+                      color: stateManager.isSelected(item)
+                          ? cellDecoration.color?.withOpacity(0.7)
+                          : cellDecoration.color,
+                    ) ??
+                    BoxDecoration(),
                 child: column.renderer(value),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
