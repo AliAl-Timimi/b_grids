@@ -1,5 +1,6 @@
 import 'package:b_grids/configuration/b_grid_config.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
+import 'package:b_grids/helpers/render_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +43,14 @@ class BRow<T> extends StatelessWidget {
                           : cellDecoration.color,
                     ) ??
                     BoxDecoration(),
-                child: column.renderer(value),
+                child: column.renderer(RenderContext(
+                  item: item,
+                  value: value,
+                  index: index,
+                  isSelected: stateManager.isSelected(item),
+                  stateManager: stateManager,
+                  column: column,
+                )),
               ),
             );
           }).toList(),

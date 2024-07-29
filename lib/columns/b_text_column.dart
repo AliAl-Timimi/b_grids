@@ -9,7 +9,7 @@ class BTextColumn extends BColumn {
     required super.field,
     super.headerRenderer = defaultHeaderRenderer,
     super.contentPadding,
-    super.defaultValue = '',
+    super.defaultValue,
     super.cellDecorationBuilder,
     super.cellTextStyleBuilder,
   }) : super(

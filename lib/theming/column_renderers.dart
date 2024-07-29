@@ -48,8 +48,8 @@ Widget defaultHeaderRenderer(
                   stateManager.getSortOrder(field).toString(),
                   style: TextStyle(
                     color: sortDirection.isAsc
-                        ? config.styling.ascendingSortIconColor
-                        : config.styling.descendingSortIconColor,
+                        ? config.styling.ascendingSortTextColor
+                        : config.styling.descendingSortTextColor,
                     fontSize: headerFontSize,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.none,

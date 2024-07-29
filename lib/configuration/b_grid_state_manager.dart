@@ -25,8 +25,9 @@ class BGridStateManager<T> with SelectionHelper<T>, SortingHelper<T> {
 
   Future<void> initGridStateManager(
       BGridConfig config, void Function(T item)? onSelect) async {
-    setMultiSelect = config.multiSelect;
+    _loadItems();
 
+    setMultiSelect = config.multiSelect;
     setOnSelect(onSelect);
   }
 
@@ -34,7 +35,6 @@ class BGridStateManager<T> with SelectionHelper<T>, SortingHelper<T> {
     originalList.clear();
     originalList.addAll(await valueProvider());
     filteredList.addAll(originalList);
-    applySorting(this);
   }
 
   void setOnSelect(void Function(T item)? onSelect) {
@@ -55,6 +55,5 @@ class BGridStateManager<T> with SelectionHelper<T>, SortingHelper<T> {
             : sortDirections[field] == SortDirection.DESC
                 ? null
                 : SortDirection.ASC);
-    applySorting(this);
   }
 }

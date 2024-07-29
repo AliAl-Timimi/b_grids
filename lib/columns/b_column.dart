@@ -1,6 +1,7 @@
 import 'package:b_grids/columns/column_type.dart';
 import 'package:b_grids/configuration/b_grid_config.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
+import 'package:b_grids/helpers/render_context.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class BColumn {
@@ -16,7 +17,7 @@ abstract class BColumn {
     this.cellTextStyleBuilder,
   });
 
-  final Widget Function(dynamic value) renderer;
+  final Widget Function(RenderContext context) renderer;
   final ColumnType type;
   final String field;
   final Widget Function(
