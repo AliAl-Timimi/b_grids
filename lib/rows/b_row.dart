@@ -32,7 +32,7 @@ class BRow<T> extends StatelessWidget {
         child: Row(
           children: stateManager.columns.map((column) {
             final value = item != null
-                ? stateManager.itemToRow[column.field]?.call(item!)
+                ? stateManager.itemToRow.call(item!)[column.field]
                 : column.defaultValue;
             final cellDecoration = column.cellDecorationBuilder?.call(value);
             return Expanded(

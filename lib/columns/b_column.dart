@@ -22,7 +22,7 @@ abstract class BColumn {
   final String field;
   final Widget Function(
     String field,
-    BGridStateManager sortDirection,
+    BGridStateManager<dynamic> stateManager,
     BGridConfig config,
   ) headerRenderer;
   final Alignment alignment;

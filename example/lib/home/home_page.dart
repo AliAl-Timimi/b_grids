@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(1000000).then(
+    generateRooms(500000).then(
       (value) {
         setState(() {
           items = value;
@@ -85,12 +85,12 @@ class _HomePageState extends State<HomePage> {
               );
             }),
       ],
-      itemToRow: {
-        'name': (room) => room.name,
-        'description': (room) => room.description,
-        'surfaceArea': (room) => room.surfaceArea,
-        'constructionDate': (room) => room.constructionDate,
-        'isFurnished': (room) => room.isFurnished,
+      itemToRow: (room) => {
+        'name': room.name,
+        'description': room.description,
+        'surfaceArea': room.surfaceArea,
+        'constructionDate': room.constructionDate,
+        'isFurnished': room.isFurnished,
       },
       valueProvider: () => items,
     );

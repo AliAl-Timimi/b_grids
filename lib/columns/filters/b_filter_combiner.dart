@@ -1,0 +1,4 @@
+enum BFilterCombiner {
+  AND,
+  OR;
+}

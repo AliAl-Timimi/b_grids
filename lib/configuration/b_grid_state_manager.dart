@@ -8,7 +8,7 @@ import 'package:b_grids/helpers/sorting_helper.dart';
 import 'package:get/get.dart';
 
 class BGridStateManager<T> with SelectionHelper<T>, SortingHelper<T> {
-  final Map<String, dynamic Function(T item)> itemToRow;
+  final Map<String, dynamic> Function(T item) itemToRow;
   final List<BColumn> columns;
   FutureOr<List<T>> Function() valueProvider;
 

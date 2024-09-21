@@ -1,0 +1,16 @@
+enum BFilterOperator {
+  EQ,
+  NQ,
+  GT,
+  GTE,
+  LT,
+  LTE,
+  IN,
+  NIN,
+  LIKE,
+  NLIKE,
+  ISNULL,
+  ISNOTNULL,
+  BETWEEN,
+  NBETWEEN,
+}
