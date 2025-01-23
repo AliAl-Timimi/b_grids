@@ -1,5 +1,5 @@
 import 'package:b_grids/columns/columns.dart';
-import 'package:b_grids/columns/filters/b_filter.dart';
+import 'package:b_grids/configuration/b_grid_config.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:b_grids/grid/b_grid.dart';
 import 'package:example/home/helpers/room_generator.dart';
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(500000).then(
+    generateRooms(5000).then(
       (value) {
         setState(() {
           items = value;
@@ -43,7 +43,9 @@ class _HomePageState extends State<HomePage> {
     final stateManager = BGridStateManager<Room>(
       columns: [
         BTextColumn(field: "name"),
-        BTextColumn(field: "description"),
+        BTextColumn(
+          field: "description",
+        ),
         BNumberColumn(
           field: "surfaceArea",
           cellDecorationBuilder: (value) {
@@ -68,23 +70,23 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           },
-          filter: BFilter<DateTime>(
-            field: "constructionDate",
-            defaultValue: DateTime.now(),
-            renderer: (stateManager, value) {
-              return TextField(
-                controller: TextEditingController(
-                  text: DateFormat('yyyy-MM-dd').format(value),
-                ),
-                onChanged: (text) {
-                  value = DateTime.parse(text);
-                },
-              );
-            },
-            filter: (value) {
-              return true;
-            },
-          ),
+          // filter: BFilter<DateTime>(
+          //   field: "constructionDate",
+          //   defaultValue: DateTime.now(),
+          //   renderer: (stateManager, [DateTime? value]) {
+          //     return TextField(
+          //       controller: TextEditingController(
+          //         text: value.toString(),
+          //       ),
+          //       onChanged: (text) {
+          //         value = DateTime.parse(text);
+          //       },
+          //     );
+          //   },
+          //   filter: (value) {
+          //     return true;
+          //   },
+          // ),
         ),
         BTextColumn(
             field: "isFurnished",
@@ -140,6 +142,9 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: BGrid<Room>(
                   stateManager: stateManager,
+                  config: BGridConfig(
+                    multiSelect: true,
+                  ),
                   onSelect: (room) async {
                     print("Selected room: ${room.name}");
                   },

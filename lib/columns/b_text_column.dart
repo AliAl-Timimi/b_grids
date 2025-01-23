@@ -13,7 +13,6 @@ class BTextColumn extends BColumn {
     super.cellDecorationBuilder,
     super.cellTextStyleBuilder,
     super.filter,
-    super.multiFilter,
   }) : super(
           type: ColumnType.TEXT,
         );

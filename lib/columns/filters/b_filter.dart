@@ -1,17 +1,15 @@
-import 'package:b_grids/configuration/b_grid_state_manager.dart';
-import 'package:flutter/material.dart';
+import 'package:b_grids/input/b_input_decoration.dart';
 
-class BFilter<T> {
+class BFilter {
   BFilter({
-    required this.field,
-    required this.renderer,
-    required this.defaultValue,
-    required this.filter,
+    this.enabled = true,
+    this.inputDecoration = const BInputDecoration(),
+    this.initialValue,
+    this.filterFunction,
   });
 
-  final Widget Function(BGridStateManager<dynamic> stateManager,T value) renderer;
-  final String field;
-  final T defaultValue;
-  final bool Function(T value) filter;
-  T? value;
+  final bool enabled;
+  final BInputDecoration inputDecoration;
+  final dynamic initialValue;
+  final bool Function(dynamic value)? filterFunction;
 }

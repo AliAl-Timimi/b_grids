@@ -32,6 +32,7 @@ class BGrid<T> extends StatelessWidget {
                     .map(
                       (column) => Flexible(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             InkWell(
                               onTap: () =>
@@ -48,13 +49,10 @@ class BGrid<T> extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            if (column.filter != null)
-                              Flexible(
-                                child: column.filter?.renderer.call(
-                                  stateManager,
-                                  config,
-                                ) ?? SizedBox.shrink(),
-                              ),
+                            Flexible(
+                              child: stateManager.filterWidgets[column.field] ??
+                                  SizedBox.shrink(),
+                            ),
                           ],
                         ),
                       ),
