@@ -5,7 +5,7 @@ import 'package:b_grids/theming/column_renderers.dart';
 import 'package:flutter/material.dart';
 
 class BNumberColumn extends BColumn {
-  const BNumberColumn({
+  BNumberColumn({
     super.renderer = defaultNumberRenderer,
     required super.field,
     super.headerRenderer = defaultHeaderRenderer,

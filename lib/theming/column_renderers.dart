@@ -44,17 +44,18 @@ Widget defaultHeaderRenderer(
                       : config.styling.descendingSortIconColor,
                   size: headerFontSize + 4,
                 ),
-                Text(
-                  stateManager.getSortOrder(field).toString(),
-                  style: TextStyle(
-                    color: sortDirection.isAsc
-                        ? config.styling.ascendingSortTextColor
-                        : config.styling.descendingSortTextColor,
-                    fontSize: headerFontSize,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.none,
+                if (stateManager.getSortOrder(field) > 0)
+                  Text(
+                    stateManager.getSortOrder(field).toString(),
+                    style: TextStyle(
+                      color: sortDirection.isAsc
+                          ? config.styling.ascendingSortTextColor
+                          : config.styling.descendingSortTextColor,
+                      fontSize: headerFontSize,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
-                ),
               ],
             ),
           ),

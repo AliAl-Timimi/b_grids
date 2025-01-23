@@ -31,20 +31,31 @@ class BGrid<T> extends StatelessWidget {
                 children: stateManager.columns
                     .map(
                       (column) => Flexible(
-                        child: InkWell(
-                          onTap: () =>
-                              stateManager.toggleColumnSort(column.field),
-                          onLongPress: () => stateManager.toggleColumnSort(
-                            column.field,
-                            clearOthers: false,
-                          ),
-                          child: Obx(
-                            () => Padding(
-                              padding: config.styling.headerPadding,
-                              child: column.headerRenderer
-                                  .call(column.field, stateManager, config),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () =>
+                                  stateManager.toggleColumnSort(column.field),
+                              onLongPress: () => stateManager.toggleColumnSort(
+                                column.field,
+                                clearOthers: false,
+                              ),
+                              child: Obx(
+                                () => Padding(
+                                  padding: config.styling.headerPadding,
+                                  child: column.headerRenderer
+                                      .call(column.field, stateManager, config),
+                                ),
+                              ),
                             ),
-                          ),
+                            if (column.filter != null)
+                              Flexible(
+                                child: column.filter?.renderer.call(
+                                  stateManager,
+                                  config,
+                                ) ?? SizedBox.shrink(),
+                              ),
+                          ],
                         ),
                       ),
                     )

@@ -1,4 +1,5 @@
 import 'package:b_grids/columns/columns.dart';
+import 'package:b_grids/columns/filters/b_filter.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:b_grids/grid/b_grid.dart';
 import 'package:example/home/helpers/room_generator.dart';
@@ -41,8 +42,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final stateManager = BGridStateManager<Room>(
       columns: [
-        const BTextColumn(field: "name"),
-        const BTextColumn(field: "description"),
+        BTextColumn(field: "name"),
+        BTextColumn(field: "description"),
         BNumberColumn(
           field: "surfaceArea",
           cellDecorationBuilder: (value) {
@@ -57,16 +58,34 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         BTextColumn(
+          field: "constructionDate",
+          renderer: (renderContext) {
+            final date = renderContext.value as DateTime?;
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                date != null ? DateFormat('yyyy-MM-dd').format(date) : '',
+              ),
+            );
+          },
+          filter: BFilter<DateTime>(
             field: "constructionDate",
-            renderer: (renderContext) {
-              final date = renderContext.value as DateTime?;
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  date != null ? DateFormat('yyyy-MM-dd').format(date) : '',
+            defaultValue: DateTime.now(),
+            renderer: (stateManager, value) {
+              return TextField(
+                controller: TextEditingController(
+                  text: DateFormat('yyyy-MM-dd').format(value),
                 ),
+                onChanged: (text) {
+                  value = DateTime.parse(text);
+                },
               );
-            }),
+            },
+            filter: (value) {
+              return true;
+            },
+          ),
+        ),
         BTextColumn(
             field: "isFurnished",
             defaultValue: false,

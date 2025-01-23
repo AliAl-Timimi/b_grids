@@ -4,7 +4,7 @@ import 'package:b_grids/theming/cell_renderers.dart';
 import 'package:b_grids/theming/column_renderers.dart';
 
 class BTextColumn extends BColumn {
-  const BTextColumn({
+  BTextColumn({
     super.renderer = defaultTextRenderer,
     required super.field,
     super.headerRenderer = defaultHeaderRenderer,
@@ -12,6 +12,8 @@ class BTextColumn extends BColumn {
     super.defaultValue,
     super.cellDecorationBuilder,
     super.cellTextStyleBuilder,
+    super.filter,
+    super.multiFilter,
   }) : super(
           type: ColumnType.TEXT,
         );
