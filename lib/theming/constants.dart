@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const offWhite = Color(0xFFF5F5F5);
 const offBlack = Color(0xFF333333);
 const offGrey = Color(0xFF666666);
+const darkBlue = Color(0xFF0786DB);
 
 const headerBackgroundColor = offWhite;
 const headerTextColor = offBlack;

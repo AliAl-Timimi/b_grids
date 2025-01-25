@@ -1,3 +1,4 @@
+import 'package:b_grids/theming/constants.dart';
 import 'package:flutter/material.dart';
 
 class BInputDecoration extends InputDecoration {
@@ -8,13 +9,31 @@ class BInputDecoration extends InputDecoration {
     super.suffixIcon,
     super.errorText,
     super.border,
-    super.enabledBorder,
-    super.focusedBorder,
+    super.enabledBorder = const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(4.0),
+      ),
+      gapPadding: 4.0,
+      borderSide: BorderSide(
+        color: offGrey,
+        width: 1.0,
+      ),
+    ),
+    super.focusedBorder = const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(4.0),
+      ),
+      gapPadding: 4.0,
+      borderSide: BorderSide(
+        color: darkBlue,
+        width: 1.0,
+      ),
+    ),
     super.errorBorder,
     super.focusedErrorBorder,
     super.disabledBorder,
     super.contentPadding,
-    super.isDense,
+    super.isDense = true,
     super.helperText,
     super.helperStyle,
     super.counter,

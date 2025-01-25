@@ -38,3 +38,18 @@ Widget defaultNumberRenderer(RenderContext renderContext) {
     ),
   );
 }
+
+Widget defaultBoolRenderer(RenderContext renderContext) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: renderContext.value as bool
+        ? const Icon(
+            Icons.check,
+            color: Colors.greenAccent,
+          )
+        : const Icon(
+            Icons.close,
+            color: Colors.redAccent,
+          ),
+  );
+}

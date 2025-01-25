@@ -17,6 +17,7 @@ class BGridStyling {
   final Color ascendingSortTextColor;
   final Color descendingSortBackgroundColor;
   final Color ascendingSortBackgroundColor;
+  final EdgeInsets filterPadding;
 
   const BGridStyling({
     this.gridDecoration = const BoxDecoration(
@@ -30,6 +31,7 @@ class BGridStyling {
     ),
     this.gridPadding = gridInsets,
     this.headerPadding = headerInsets,
+    this.filterPadding = const EdgeInsets.all(8),
     this.headerDecoration = const BoxDecoration(
       color: headerBackgroundColor,
       border: Border(

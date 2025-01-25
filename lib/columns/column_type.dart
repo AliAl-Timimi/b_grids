@@ -1,10 +1,9 @@
 enum ColumnType {
   TEXT,
   NUMBER,
-  BOOLEAN,
+  BOOL,
   DATETIME,
   DATE,
   TIME,
   ICON,
-  IMAGE,
 }

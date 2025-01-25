@@ -22,7 +22,7 @@ class BGrid<T> extends StatelessWidget {
 
     return DecoratedBox(
       decoration: config.styling.gridDecoration,
-      child: Material(
+      child: SizedBox.expand(
         child: Column(
           children: [
             DecoratedBox(
@@ -50,8 +50,12 @@ class BGrid<T> extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              child: stateManager.filterWidgets[column.field] ??
-                                  SizedBox.shrink(),
+                              child: Padding(
+                                padding: config.styling.filterPadding,
+                                child:
+                                    stateManager.filterWidgets[column.field] ??
+                                        SizedBox.shrink(),
+                              ),
                             ),
                           ],
                         ),
@@ -62,27 +66,30 @@ class BGrid<T> extends StatelessWidget {
             ),
             Flexible(
               child: Obx(
-                () => ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  prototypeItem: BRow<T>(
-                    config: config,
-                    item: stateManager.items.isNotEmpty
-                        ? stateManager.items.first
-                        : null,
-                    stateManager: stateManager,
-                    index: 0,
-                  ),
-                  itemCount: stateManager.filteredList.length,
-                  itemBuilder: (context, index) => InkWell(
-                    hoverColor: config.styling.hoverColor,
-                    onTap: () => stateManager.toggleSelection(
-                        stateManager.filteredList.elementAt(index)),
-                    splashColor: config.styling.splashColor,
-                    child: BRow<T>(
-                      stateManager: stateManager,
+                () => Material(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    prototypeItem: BRow<T>(
                       config: config,
-                      item: stateManager.filteredList.elementAt(index),
-                      index: index,
+                      item: stateManager.items.isNotEmpty
+                          ? stateManager.items.first
+                          : null,
+                      stateManager: stateManager,
+                      index: 0,
+                    ),
+                    itemCount: stateManager.filteredList.length,
+                    itemBuilder: (context, index) => InkWell(
+                      hoverColor: config.styling.hoverColor,
+                      onTap: () => stateManager.toggleSelection(
+                          stateManager.filteredList.elementAt(index)),
+                      splashColor: config.styling.splashColor,
+                      child: BRow<T>(
+                        stateManager: stateManager,
+                        config: config,
+                        item: stateManager.filteredList.elementAt(index),
+                        index: index,
+                      ),
                     ),
                   ),
                 ),

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(5000).then(
+    generateRooms(50000).then(
       (value) {
         setState(() {
           items = value;
@@ -70,41 +70,11 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           },
-          // filter: BFilter<DateTime>(
-          //   field: "constructionDate",
-          //   defaultValue: DateTime.now(),
-          //   renderer: (stateManager, [DateTime? value]) {
-          //     return TextField(
-          //       controller: TextEditingController(
-          //         text: value.toString(),
-          //       ),
-          //       onChanged: (text) {
-          //         value = DateTime.parse(text);
-          //       },
-          //     );
-          //   },
-          //   filter: (value) {
-          //     return true;
-          //   },
-          // ),
         ),
-        BTextColumn(
-            field: "isFurnished",
-            defaultValue: false,
-            renderer: (renderContext) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: renderContext.value as bool
-                    ? const Icon(
-                        Icons.check,
-                        color: Colors.greenAccent,
-                      )
-                    : const Icon(
-                        Icons.close,
-                        color: Colors.redAccent,
-                      ),
-              );
-            }),
+        BBoolColumn(
+          field: "isFurnished",
+          defaultValue: false,
+        ),
       ],
       itemToRow: (room) => {
         'name': room.name,
