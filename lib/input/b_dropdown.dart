@@ -1,4 +1,5 @@
 import 'package:b_grids/input/b_input_decoration.dart';
+import 'package:b_grids/theming/constants.dart';
 import 'package:flutter/material.dart';
 
 class BDropDown extends StatelessWidget {
@@ -20,8 +21,8 @@ class BDropDown extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
-          width: 1,
+          color: decoration.border?.borderSide.color ?? offGrey,
+          width: decoration.border?.borderSide.width ?? 1,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
@@ -33,6 +34,7 @@ class BDropDown extends StatelessWidget {
           isExpanded: true,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
           underline: const SizedBox.shrink(),
+          focusColor: decoration.focusColor,
           selectedItemBuilder: (BuildContext context) {
             return items.entries
                 .where((entry) => entry.key == value)

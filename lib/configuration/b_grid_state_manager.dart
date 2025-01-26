@@ -21,7 +21,7 @@ class BGridStateManager<T>
   });
 
   final RxList<T> originalList = <T>[].obs;
-  final RxList<T> filteredList = <T>[].obs;
+  final RxList<T> refItems = <T>[].obs;
 
   List<T> get items => [...originalList];
 
@@ -36,7 +36,7 @@ class BGridStateManager<T>
   void _loadItems() async {
     originalList.clear();
     originalList.addAll(await valueProvider());
-    filteredList.addAll(originalList);
+    refItems.addAll(originalList);
   }
 
   void setOnSelect(void Function(T item)? onSelect) {

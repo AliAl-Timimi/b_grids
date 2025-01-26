@@ -8,5 +8,4 @@ class BFilter {
 
   final BInputDecoration inputDecoration;
   final dynamic initialValue;
-  // final bool Function(dynamic value)? filterFunction;
 }

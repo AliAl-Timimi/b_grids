@@ -37,8 +37,8 @@ mixin SortingHelper<T> {
       return 0;
     });
 
-    stateManager.filteredList.clear();
-    stateManager.filteredList.addAll(stateManager.originalList);
+    stateManager.refItems.clear();
+    stateManager.refItems.addAll(stateManager.originalList);
   }
 
   void setSortDirection(String field, SortDirection? direction) {

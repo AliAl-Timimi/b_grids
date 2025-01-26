@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 const offWhite = Color(0xFFF5F5F5);
 const offBlack = Color(0xFF333333);
@@ -24,3 +25,6 @@ const headerFontSize = 12.0;
 /// blue with 0.5 opacity
 const selectedRowBackgroundColor = Color(0x4D0786DB);
 const hoverRowBackgroundColor = Color(0x1A0C47E1);
+
+String thousandSeparator = NumberFormat().symbols.GROUP_SEP;
+String decimalSeparator = NumberFormat().symbols.DECIMAL_SEP;

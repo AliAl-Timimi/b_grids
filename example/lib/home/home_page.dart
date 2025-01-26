@@ -17,6 +17,51 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Room> items = [];
   bool loading = false;
+  final stateManager = BGridStateManager<Room>(
+    columns: [
+      BTextColumn(field: "name"),
+      BTextColumn(
+        field: "description",
+      ),
+      BNumberColumn(
+        field: "surfaceArea",
+        cellDecorationBuilder: (value) {
+          return BoxDecoration(
+            color: value > 50 ? Colors.red : Colors.green,
+          );
+        },
+        cellTextStyleBuilder: (value) {
+          return TextStyle(
+            color: value > 50 ? Colors.white : Colors.black,
+          );
+        },
+      ),
+      BTextColumn(
+        field: "constructionDate",
+        renderer: (renderContext) {
+          final date = renderContext.value as DateTime?;
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              date != null ? DateFormat('yyyy-MM-dd').format(date) : '',
+            ),
+          );
+        },
+      ),
+      BBoolColumn(
+        field: "isFurnished",
+        defaultValue: false,
+      ),
+    ],
+    itemToRow: (room) => {
+      'name': room.name,
+      'description': room.description,
+      'surfaceArea': room.surfaceArea,
+      'constructionDate': room.constructionDate,
+      'isFurnished': room.isFurnished,
+    },
+    valueProvider: () => [],
+  );
 
   Future<void> _refresh() async {
     setState(() {
@@ -36,55 +81,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _refresh();
+    stateManager.valueProvider = () => items;
   }
 
   @override
   Widget build(BuildContext context) {
-    final stateManager = BGridStateManager<Room>(
-      columns: [
-        BTextColumn(field: "name"),
-        BTextColumn(
-          field: "description",
-        ),
-        BNumberColumn(
-          field: "surfaceArea",
-          cellDecorationBuilder: (value) {
-            return BoxDecoration(
-              color: value > 50 ? Colors.red : Colors.green,
-            );
-          },
-          cellTextStyleBuilder: (value) {
-            return TextStyle(
-              color: value > 50 ? Colors.white : Colors.black,
-            );
-          },
-        ),
-        BTextColumn(
-          field: "constructionDate",
-          renderer: (renderContext) {
-            final date = renderContext.value as DateTime?;
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                date != null ? DateFormat('yyyy-MM-dd').format(date) : '',
-              ),
-            );
-          },
-        ),
-        BBoolColumn(
-          field: "isFurnished",
-          defaultValue: false,
-        ),
-      ],
-      itemToRow: (room) => {
-        'name': room.name,
-        'description': room.description,
-        'surfaceArea': room.surfaceArea,
-        'constructionDate': room.constructionDate,
-        'isFurnished': room.isFurnished,
-      },
-      valueProvider: () => items,
-    );
+
     if (loading) {
       return const Scaffold(
         body: Center(

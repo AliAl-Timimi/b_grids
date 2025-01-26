@@ -1,4 +1,5 @@
 import 'package:b_grids/input/b_input_decoration.dart';
+import 'package:b_grids/theming/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +24,8 @@ class _BNumberFieldState extends State<BNumberField> {
       decoration: BInputDecoration(),
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly
+        FilteringTextInputFormatter(RegExp(r'(^\-?(\d*'+'${thousandSeparator}?'+r'\d*)*'+'${decimalSeparator}?'+r'\d*)'),
+            allow: true)
       ],
       controller: TextEditingController(
         text: widget.value?.toString() ?? "",

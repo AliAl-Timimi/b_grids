@@ -78,16 +78,16 @@ class BGrid<T> extends StatelessWidget {
                       stateManager: stateManager,
                       index: 0,
                     ),
-                    itemCount: stateManager.filteredList.length,
+                    itemCount: stateManager.refItems.length,
                     itemBuilder: (context, index) => InkWell(
                       hoverColor: config.styling.hoverColor,
                       onTap: () => stateManager.toggleSelection(
-                          stateManager.filteredList.elementAt(index)),
+                          stateManager.refItems.elementAt(index)),
                       splashColor: config.styling.splashColor,
                       child: BRow<T>(
                         stateManager: stateManager,
                         config: config,
-                        item: stateManager.filteredList.elementAt(index),
+                        item: stateManager.refItems.elementAt(index),
                         index: index,
                       ),
                     ),

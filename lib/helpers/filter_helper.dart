@@ -1,5 +1,6 @@
 import 'package:b_grids/columns/column_type.dart';
 import 'package:b_grids/columns/filters/b_filter.dart';
+import 'package:b_grids/columns/filters/b_number_filter.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:b_grids/input/b_dropdown.dart';
 import 'package:b_grids/input/b_number_field.dart';
@@ -18,7 +19,10 @@ mixin filterHelper<T> {
           _createTextFilter(stateManager, column.field, column.filter);
           break;
         case ColumnType.NUMBER:
-          _createNumberFilter(stateManager, column.field, column.filter);
+        case ColumnType.DOUBLE:
+          _createNumberFilter(
+              stateManager, column.field, column.filter as BNumberFilter?);
+          break;
         case ColumnType.BOOL:
           _createBooleanFilter(stateManager, column.field, column.filter);
         case ColumnType.DATETIME:
@@ -33,8 +37,8 @@ mixin filterHelper<T> {
     });
   }
 
-  void _filterColumn(
-      BGridStateManager<T> stateManager, String field, dynamic value) {
+  void _filterColumn(BGridStateManager<T> stateManager, String field,
+      dynamic value) {
     filterValues[field] = value;
     _updateFilters(stateManager);
   }
@@ -43,37 +47,69 @@ mixin filterHelper<T> {
     List<T> _tempList = stateManager.originalList;
     filterValues.forEach((key, value) {
       if (value == null) return;
-      _tempList = _tempList.where((item) {
-        final row = stateManager.itemToRow(item);
-        return row[key]
-            .toString()
-            .toLowerCase()
-            .contains(value.toString().toLowerCase());
-      }).toList();
+      if (value is String && value.isNotEmpty) {
+        _tempList = _tempList.where((item) {
+          final row = stateManager.itemToRow(item);
+          return row[key]
+              .toString()
+              .toLowerCase()
+              .contains(value.toString().toLowerCase());
+        }).toList();
+      }
+      if (value is List<int?> && value.isNotEmpty) {
+        _tempList = _tempList.where((item) {
+          final row = stateManager.itemToRow(item);
+          return (value[0] == null || row[key] as int >= value[0]!) &&
+              (value[1] == null || row[key] as int <= value[1]!);
+        }).toList();
+      }
     });
-    stateManager.filteredList.clear();
-    stateManager.filteredList.addAll(_tempList);
+    stateManager.refItems.clear();
+    stateManager.refItems.addAll(_tempList);
   }
 
-  void _createTextFilter(
-    BGridStateManager<T> stateManager,
-    String field,
-    BFilter? filter,
-  ) {
+  void _createTextFilter(BGridStateManager<T> stateManager,
+      String field,
+      BFilter? filter,) {
     filterWidgets[field] = BTextField(
       onChanged: (value) => _filterColumn(stateManager, field, value),
     );
   }
 
-  void _createNumberFilter(
-      BGridStateManager<T> stateManager, String field, BFilter? filter) {
-    filterWidgets[field] = BNumberField(
-      onChanged: (value) => _filterColumn(stateManager, field, value),
+  void _createNumberFilter(BGridStateManager<T> stateManager, String field,
+      BNumberFilter? filter) {
+    int? min;
+    int? max;
+    filterWidgets[field] = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Flexible(
+          child: BNumberField(
+            onChanged: (value) =>
+            {
+              min = value as int?,
+              _filterColumn(stateManager, field, [min, max]),
+            },
+          ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Flexible(
+          child: BNumberField(
+            onChanged: (value) =>
+            {
+              max = value as int?,
+              _filterColumn(stateManager, field, [min, max]),
+            },
+          ),
+        ),
+      ],
     );
   }
 
-  void _createBooleanFilter(
-      BGridStateManager<T> stateManager, String field, BFilter? filter) {
+  void _createBooleanFilter(BGridStateManager<T> stateManager, String field,
+      BFilter? filter) {
     filterWidgets[field] = BDropDown(
       onChanged: (value) => _filterColumn(stateManager, field, value),
       items: {
@@ -93,4 +129,3 @@ mixin filterHelper<T> {
       },
     );
   }
-}
