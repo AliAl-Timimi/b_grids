@@ -1,6 +1,7 @@
 import 'package:b_grids/helpers/render_context.dart';
 import 'package:b_grids/theming/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Widget defaultTextRenderer(RenderContext renderContext) {
   return Padding(
@@ -28,6 +29,42 @@ Widget defaultNumberRenderer(RenderContext renderContext) {
     padding: renderContext.column.contentPadding,
     child: Text(
       renderContext.value.toString(),
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        color: rowTextColor,
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        decoration: TextDecoration.none,
+      ),
+    ),
+  );
+}
+
+Widget defaultDateRenderer(RenderContext renderContext) {
+  return Padding(
+    padding: renderContext.column.contentPadding,
+    child: Text(
+      renderContext.value != null
+          ? DateFormat().format(renderContext.value as DateTime)
+          : '',
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        color: rowTextColor,
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        decoration: TextDecoration.none,
+      ),
+    ),
+  );
+}
+
+Widget defaultDateTimeRenderer(RenderContext renderContext) {
+  return Padding(
+    padding: renderContext.column.contentPadding,
+    child: Text(
+      renderContext.value != null
+          ? DateFormat().format(renderContext.value as DateTime)
+          : '',
       textAlign: TextAlign.right,
       style: TextStyle(
         color: rowTextColor,

@@ -2,7 +2,8 @@ import 'package:b_grids/columns/column_type.dart';
 import 'package:b_grids/columns/filters/b_filter.dart';
 import 'package:b_grids/columns/filters/b_number_filter.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
-import 'package:b_grids/input/b_dropdown.dart';
+import 'package:b_grids/input/b_bool_dropdown.dart';
+import 'package:b_grids/input/b_date_picker.dart';
 import 'package:b_grids/input/b_number_field.dart';
 import 'package:b_grids/input/b_text_field.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,9 @@ mixin filterHelper<T> {
         case ColumnType.BOOL:
           _createBooleanFilter(stateManager, column.field, column.filter);
         case ColumnType.DATETIME:
-        // TODO: Handle this case.
+          _createDateTimeFilter(stateManager, column.field, column.filter);
         case ColumnType.DATE:
-        // TODO: Handle this case.
+          _createDateFilter(stateManager, column.field, column.filter);
         case ColumnType.TIME:
         // TODO: Handle this case.
         case ColumnType.ICON:
@@ -37,8 +38,8 @@ mixin filterHelper<T> {
     });
   }
 
-  void _filterColumn(BGridStateManager<T> stateManager, String field,
-      dynamic value) {
+  void _filterColumn(
+      BGridStateManager<T> stateManager, String field, dynamic value) {
     filterValues[field] = value;
     _updateFilters(stateManager);
   }
@@ -63,21 +64,29 @@ mixin filterHelper<T> {
               (value[1] == null || row[key] as int <= value[1]!);
         }).toList();
       }
+      if (value is bool) {
+        _tempList = _tempList.where((item) {
+          final row = stateManager.itemToRow(item);
+          return row[key] == value;
+        }).toList();
+      }
     });
     stateManager.refItems.clear();
     stateManager.refItems.addAll(_tempList);
   }
 
-  void _createTextFilter(BGridStateManager<T> stateManager,
-      String field,
-      BFilter? filter,) {
+  void _createTextFilter(
+    BGridStateManager<T> stateManager,
+    String field,
+    BFilter? filter,
+  ) {
     filterWidgets[field] = BTextField(
       onChanged: (value) => _filterColumn(stateManager, field, value),
     );
   }
 
-  void _createNumberFilter(BGridStateManager<T> stateManager, String field,
-      BNumberFilter? filter) {
+  void _createNumberFilter(
+      BGridStateManager<T> stateManager, String field, BNumberFilter? filter) {
     int? min;
     int? max;
     filterWidgets[field] = Row(
@@ -85,8 +94,7 @@ mixin filterHelper<T> {
       children: [
         Flexible(
           child: BNumberField(
-            onChanged: (value) =>
-            {
+            onChanged: (value) => {
               min = value as int?,
               _filterColumn(stateManager, field, [min, max]),
             },
@@ -97,8 +105,7 @@ mixin filterHelper<T> {
         ),
         Flexible(
           child: BNumberField(
-            onChanged: (value) =>
-            {
+            onChanged: (value) => {
               max = value as int?,
               _filterColumn(stateManager, field, [min, max]),
             },
@@ -108,9 +115,9 @@ mixin filterHelper<T> {
     );
   }
 
-  void _createBooleanFilter(BGridStateManager<T> stateManager, String field,
-      BFilter? filter) {
-    filterWidgets[field] = BDropDown(
+  void _createBooleanFilter(
+      BGridStateManager<T> stateManager, String field, BFilter? filter) {
+    filterWidgets[field] = BBoolDropdown(
       onChanged: (value) => _filterColumn(stateManager, field, value),
       items: {
         null: const SizedBox.shrink(),
@@ -129,3 +136,19 @@ mixin filterHelper<T> {
       },
     );
   }
+
+  void _createDateTimeFilter(
+      BGridStateManager<T> stateManager, String field, BFilter? filter) {
+    filterWidgets[field] = BDatePicker(
+      onChanged: (value) => _filterColumn(stateManager, field, value),
+    );
+  }
+
+  void _createDateFilter(
+      BGridStateManager<T> stateManager, String field, BFilter? filter) {
+    filterWidgets[field] = BDatePicker(
+      onChanged: (value) => _filterColumn(stateManager, field, value),
+      format: "yyyy-MM-dd",
+    );
+  }
+}

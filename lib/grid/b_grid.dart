@@ -2,6 +2,7 @@ import 'package:b_grids/configuration/b_grid_config.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
 import 'package:b_grids/rows/b_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BGrid<T> extends StatelessWidget {
@@ -35,11 +36,13 @@ class BGrid<T> extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             InkWell(
-                              onTap: () =>
-                                  stateManager.toggleColumnSort(column.field),
+                              onTap: () => stateManager.toggleColumnSort(
+                                  column.field,
+                                  clearOthers: !HardwareKeyboard
+                                      .instance.isShiftPressed),
                               onLongPress: () => stateManager.toggleColumnSort(
                                 column.field,
-                                clearOthers: false,
+                                clearOthers: true,
                               ),
                               child: Obx(
                                 () => Padding(

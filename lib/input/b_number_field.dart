@@ -24,7 +24,12 @@ class _BNumberFieldState extends State<BNumberField> {
       decoration: BInputDecoration(),
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter(RegExp(r'(^\-?(\d*'+'${thousandSeparator}?'+r'\d*)*'+'${decimalSeparator}?'+r'\d*)'),
+        FilteringTextInputFormatter(
+            RegExp(r'(^\-?(\d+' +
+                '${thousandSeparator}?' +
+                r'\d*)*' +
+                '${decimalSeparator}?' +
+                r'\d*)'),
             allow: true)
       ],
       controller: TextEditingController(

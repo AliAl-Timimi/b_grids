@@ -5,7 +5,6 @@ import 'package:b_grids/grid/b_grid.dart';
 import 'package:example/home/helpers/room_generator.dart';
 import 'package:example/models/room.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,17 +35,8 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      BTextColumn(
+      BDateColumn(
         field: "constructionDate",
-        renderer: (renderContext) {
-          final date = renderContext.value as DateTime?;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              date != null ? DateFormat('yyyy-MM-dd').format(date) : '',
-            ),
-          );
-        },
       ),
       BBoolColumn(
         field: "isFurnished",
@@ -67,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(50000).then(
+    generateRooms(5000).then(
       (value) {
         setState(() {
           items = value;
@@ -86,7 +76,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     if (loading) {
       return const Scaffold(
         body: Center(
