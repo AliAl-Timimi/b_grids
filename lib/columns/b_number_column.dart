@@ -6,17 +6,18 @@ import 'package:b_grids/theming/column_renderers.dart';
 import 'package:flutter/material.dart';
 
 class BNumberColumn extends BColumn {
-  BNumberColumn(
-      {super.renderer = defaultNumberRenderer,
-      required super.field,
-      super.headerRenderer = defaultHeaderRenderer,
-      super.alignment = Alignment.centerRight,
-      super.contentPadding,
-      super.defaultValue = 0,
-      super.cellDecorationBuilder,
-      super.cellTextStyleBuilder,
-      this.filter})
-      : super(
+  BNumberColumn({
+    super.renderer = defaultNumberRenderer,
+    required super.field,
+    super.headerRenderer = defaultHeaderRenderer,
+    super.alignment = Alignment.centerRight,
+    super.contentPadding,
+    super.defaultValue = 0,
+    super.cellDecorationBuilder,
+    super.cellTextStyleBuilder,
+    super.footerRenderer,
+    this.filter,
+  }) : super(
           type: ColumnType.NUMBER,
           filter: filter,
         );

@@ -1,4 +1,3 @@
-
 import 'package:b_grids/b_grids.dart';
 import 'package:b_grids/columns/column_type.dart';
 import 'package:b_grids/theming/cell_renderers.dart';
@@ -14,6 +13,8 @@ class BDateColumn extends BColumn {
     super.cellDecorationBuilder,
     super.cellTextStyleBuilder,
     super.filter,
+    super.footerRenderer,
+    super.alignment,
   }) : super(
           type: ColumnType.DATE,
         );

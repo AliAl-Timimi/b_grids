@@ -39,7 +39,7 @@ class BRow<T> extends StatelessWidget {
               child: DecoratedBox(
                 decoration: cellDecoration?.copyWith(
                       color: stateManager.isSelected(item)
-                          ? cellDecoration.color?.withOpacity(0.7)
+                          ? cellDecoration.color?.withValues(alpha: 0.7)
                           : cellDecoration.color,
                     ) ??
                     BoxDecoration(),

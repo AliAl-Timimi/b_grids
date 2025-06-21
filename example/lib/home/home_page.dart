@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
             color: value > 50 ? Colors.white : Colors.black,
           );
         },
+        footerRenderer: DefaultFooters.Sum(),
       ),
       BDateColumn(
         field: "constructionDate",

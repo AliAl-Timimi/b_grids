@@ -1,5 +1,6 @@
 import 'package:b_grids/configuration/b_grid_config.dart';
 import 'package:b_grids/configuration/b_grid_state_manager.dart';
+import 'package:b_grids/rows/b_footer_row.dart';
 import 'package:b_grids/rows/b_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,6 +99,9 @@ class BGrid<T> extends StatelessWidget {
                 ),
               ),
             ),
+            if (stateManager.columns
+                .any((element) => element.footerRenderer != null))
+              BFooterRow(config: config, stateManager: stateManager,)
           ],
         ),
       ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 Widget defaultHeaderRenderer(
   String field,
-  BGridStateManager stateManager,
+  BGridStateManager<dynamic> stateManager,
   BGridConfig config,
 ) {
   final sortDirection = stateManager.getSortDirection(field);
