@@ -16,6 +16,7 @@ class BDatePicker extends StatelessWidget {
   final void Function(dynamic value) onChanged;
   final InputDecoration decoration;
   final String? format;
+  //TODO date variables
 
   @override
   Widget build(BuildContext context) {

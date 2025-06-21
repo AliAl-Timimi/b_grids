@@ -13,6 +13,12 @@ mixin filterHelper<T> {
   final RxMap<String, Widget> filterWidgets = <String, Widget>{}.obs;
   final RxMap<String, dynamic> filterValues = <String, dynamic>{}.obs;
 
+
+  //TODO CLEAR CALLBACK FOR CUSTOM FILTERS
+  void clearFilters() {
+    filterValues.clear();
+  }
+
   void createFiltersFromStateManager(BGridStateManager<T> stateManager) {
     stateManager.columns.forEach((column) {
       switch (column.type) {
@@ -34,6 +40,8 @@ mixin filterHelper<T> {
         // TODO: Handle this case.
         case ColumnType.ICON:
         // TODO: Handle this case.
+        case ColumnType.CUSTOM:
+          //TODO
       }
     });
   }

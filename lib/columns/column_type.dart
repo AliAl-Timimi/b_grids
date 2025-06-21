@@ -7,4 +7,5 @@ enum ColumnType {
   DATE,
   TIME,
   ICON,
+  CUSTOM,
 }

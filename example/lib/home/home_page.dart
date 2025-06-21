@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(50000).then(
+    generateRooms(5000).then(
       (value) {
         setState(() {
           items = value;
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                 child: BGrid<Room>(
                   stateManager: stateManager,
                   config: BGridConfig(
-                    multiSelect: true,
+                    multiSelect: false,
                   ),
                   onSelect: (room) async {
                     print("Selected room: ${room.name}");

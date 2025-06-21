@@ -4,7 +4,7 @@ mixin SelectionHelper<T> {
   final selectedItems = RxList<T>([]);
   void Function(T item)? onSelect;
   bool _multiSelect = false;
-
+  //TODO READONLY MODE => NO SELECT
   bool isSelected(T? item) => selectedItems.contains(item);
 
   Future<bool> toggleSelection(T item) async {

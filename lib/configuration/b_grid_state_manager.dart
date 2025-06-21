@@ -58,4 +58,8 @@ class BGridStateManager<T>
                 ? null
                 : SortDirection.ASC);
   }
+
+  void clearFilter() {
+    clearFilters();
+  }
 }
