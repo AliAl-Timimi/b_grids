@@ -12,6 +12,7 @@ Widget defaultHeaderRenderer(
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
+      stateManager.columns.where((element) => element.field == field,).firstOrNull?.headerText ??
       Text(
         field,
         style: TextStyle(

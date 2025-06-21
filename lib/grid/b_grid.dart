@@ -101,7 +101,10 @@ class BGrid<T> extends StatelessWidget {
             ),
             if (stateManager.columns
                 .any((element) => element.footerRenderer != null))
-              BFooterRow(config: config, stateManager: stateManager,)
+              BFooterRow(
+                config: config,
+                stateManager: stateManager,
+              )
           ],
         ),
       ),

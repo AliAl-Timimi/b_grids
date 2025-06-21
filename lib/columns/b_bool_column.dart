@@ -13,6 +13,9 @@ class BBoolColumn extends BColumn {
     super.cellDecorationBuilder,
     super.cellTextStyleBuilder,
     super.filter,
+    super.headerText,
+    super.alignment,
+    super.footerRenderer
   }) : super(
           type: ColumnType.BOOL,
         );

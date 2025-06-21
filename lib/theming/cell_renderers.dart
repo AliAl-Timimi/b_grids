@@ -8,12 +8,14 @@ Widget defaultTextRenderer(RenderContext renderContext) {
     padding: renderContext.column.contentPadding,
     child: Text(
       renderContext.value.toString(),
-      style: TextStyle(
-        color: rowTextColor,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        decoration: TextDecoration.none,
-      ),
+      style: renderContext.column.cellTextStyleBuilder
+              ?.call(renderContext.value) ??
+          TextStyle(
+            color: rowTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none,
+          ),
     ),
   );
 }
@@ -30,12 +32,14 @@ Widget defaultNumberRenderer(RenderContext renderContext) {
     child: Text(
       renderContext.value.toString(),
       textAlign: TextAlign.right,
-      style: TextStyle(
-        color: rowTextColor,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        decoration: TextDecoration.none,
-      ),
+      style: renderContext.column.cellTextStyleBuilder
+              ?.call(renderContext.value) ??
+          TextStyle(
+            color: rowTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none,
+          ),
     ),
   );
 }
@@ -48,12 +52,14 @@ Widget defaultDateRenderer(RenderContext renderContext) {
           ? DateFormat().format(renderContext.value as DateTime)
           : '',
       textAlign: TextAlign.right,
-      style: TextStyle(
-        color: rowTextColor,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        decoration: TextDecoration.none,
-      ),
+      style: renderContext.column.cellTextStyleBuilder
+              ?.call(renderContext.value) ??
+          TextStyle(
+            color: rowTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none,
+          ),
     ),
   );
 }
@@ -66,12 +72,14 @@ Widget defaultDateTimeRenderer(RenderContext renderContext) {
           ? DateFormat().format(renderContext.value as DateTime)
           : '',
       textAlign: TextAlign.right,
-      style: TextStyle(
-        color: rowTextColor,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        decoration: TextDecoration.none,
-      ),
+      style: renderContext.column.cellTextStyleBuilder
+              ?.call(renderContext.value) ??
+          TextStyle(
+            color: rowTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none,
+          ),
     ),
   );
 }

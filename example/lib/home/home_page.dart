@@ -41,6 +41,9 @@ class _HomePageState extends State<HomePage> {
       ),
       BBoolColumn(
         field: "isFurnished",
+        headerText: Text(
+          "Furnished"
+        ),
         defaultValue: false,
       ),
     ],
@@ -58,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       loading = true;
     });
-    generateRooms(5000).then(
+    generateRooms(50000).then(
       (value) {
         setState(() {
           items = value;

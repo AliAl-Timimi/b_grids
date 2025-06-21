@@ -15,6 +15,7 @@ class BDateColumn extends BColumn {
     super.filter,
     super.alignment,
     super.footerRenderer,
+    super.headerText,
   }) : super(
           type: ColumnType.DATETIME,
         );

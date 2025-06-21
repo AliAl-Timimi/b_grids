@@ -18,6 +18,7 @@ abstract class BColumn {
     this.cellTextStyleBuilder,
     this.filter,
     this.footerRenderer,
+    this.headerText,
   });
 
   final Widget Function(RenderContext context) renderer;
@@ -35,6 +36,7 @@ abstract class BColumn {
   final TextStyle Function(dynamic value)? cellTextStyleBuilder;
   final Widget Function(BGridStateManager<dynamic>, String field)?
       footerRenderer;
+  final Text? headerText;
 
   final BFilter? filter;
 }

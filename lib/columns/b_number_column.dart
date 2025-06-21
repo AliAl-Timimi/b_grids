@@ -17,6 +17,7 @@ class BNumberColumn extends BColumn {
     super.cellTextStyleBuilder,
     super.footerRenderer,
     this.filter,
+    super.headerText,
   }) : super(
           type: ColumnType.NUMBER,
           filter: filter,

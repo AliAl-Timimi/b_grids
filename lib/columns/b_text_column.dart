@@ -14,6 +14,7 @@ class BTextColumn extends BColumn {
     super.cellTextStyleBuilder,
     super.filter,
     super.footerRenderer,
+    super.headerText,
   }) : super(
           type: ColumnType.TEXT,
         );
